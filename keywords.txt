@@ -1,0 +1,46 @@
+#######################################
+# Syntax Coloring Map For LoRa
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+SimpleLMIC	KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+personalize	KEYWORD2
+join	KEYWORD2
+
+begin	KEYWORD2
+end	KEYWORD2
+sleep	KEYWORD2
+
+onMessage	KEYWORD2
+
+isBusy	KEYWORD2
+isLink	KEYWORD2
+
+setLink	KEYWORD2
+setAdr	KEYWORD2
+setSubBand	KEYWORD2
+setError	KEYWORD2
+
+write	KEYWORD2
+available	KEYWORD2
+read	KEYWORD2
+peek	KEYWORD2
+flush	KEYWORD2
+
+setAppKey	KEYWORD2
+setAppEui	KEYWORD2
+setDevEui	KEYWORD2
+
+#######################################
+# Constants (LITERAL1)
+#######################################
+
+SimpleLMICpin
