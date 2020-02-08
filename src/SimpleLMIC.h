@@ -34,10 +34,6 @@ class SimpleLMICClass : public Stream
 private:
 	// ----------------------------------------------- //
 	// 	buffer
-	uint8_t payload_buf[SIMPLE_LMIC_BUF_SIZE];
-	uint8_t payload_len = 0;
-	uint8_t payload_position = 0;
-
 	uint8_t position = 0;
 	// ----------------------------------------------- //
 	uint8_t _sleep = 0;

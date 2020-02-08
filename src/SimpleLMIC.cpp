@@ -168,15 +168,13 @@ int32_t SimpleLMICClass::read32()
 
 uint8_t *SimpleLMICClass::buffer()
 {
-  return ((uint8_t *)&payload_buf) + payload_position;
+  return ((uint8_t *)(LMIC.frame + LMIC.dataBeg + position));
 }
 
 void SimpleLMICClass::clear()
 {
   LMIC.pendTxLen = 0;
   position = 0;
-  payload_len = 0;
-  payload_position = 0;
 }
 
 unsigned int SimpleLMICClass::readInt()
