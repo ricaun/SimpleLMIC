@@ -57,6 +57,7 @@ public:
 
 	void join();
 	void join(const char *_aeui, const char *_akey);
+	void join(const char *_deui, const char *_aeui, const char *_akey);
 
 	void setLink(bool link);
 	void setAdr(bool adr);
@@ -90,13 +91,14 @@ public:
 	unsigned long readLong();
 
 	void onMessage(void (*cb)(uint8_t *payload, size_t size, uint8_t port));
-	void onSleep(void (*cb)());
 
 	void setAppKey(uint8_t *_akey);
 	void setAppKey(const char *_akey);
 	void setAppEui(uint8_t *_aeui);
 	void setAppEui(const char *_aeui);
 	void setDevEui(uint8_t *_deui);
+	void setDevEui(const char *_deui);
+
 	void personalize(const char * devAddr, const char * nwkSKey, const char * appSKey);
 
 	void message(uint8_t *payload, size_t size, uint8_t port);

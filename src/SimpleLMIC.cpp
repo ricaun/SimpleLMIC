@@ -48,6 +48,14 @@ void SimpleLMICClass::join(const char *_aeui, const char *_akey)
   join();
 }
 
+void SimpleLMICClass::join(const char *_deui, const char *_aeui, const char *_akey)
+{
+  setDevEui(_deui);
+  setAppKey(_akey);
+  setAppEui(_aeui);
+  join();
+}
+
 /***********************************************************************************/
 
 void SimpleLMICClass::setLink(bool link)
@@ -210,11 +218,6 @@ void SimpleLMICClass::onMessage(void (*cb)(uint8_t *payload, size_t size, uint8_
   messageCallback = cb;
 }
 
-void SimpleLMICClass::onSleep(void (*cb)())
-{
-  sleepCallback = cb;
-}
-
 void SimpleLMICClass::message(uint8_t *payload, size_t size, uint8_t port)
 {
   if (messageCallback)
@@ -250,6 +253,11 @@ void SimpleLMICClass::setAppEui(const char *_aeui)
 void SimpleLMICClass::setDevEui(uint8_t *_deui)
 {
   memcpy(DevEui, _deui, 8);
+}
+
+void SimpleLMICClass::setDevEui(const char *_deui)
+{
+  LORA_HEX_TO_BYTE(DevEui, _deui, 8);
 }
 
 void SimpleLMICClass::personalize(const char *_devAddr, const char *_nwkSKey, const char *_appSKey)

@@ -19,10 +19,17 @@ begin	KEYWORD2
 end	KEYWORD2
 sleep	KEYWORD2
 
+setLink	KEYWORD2
+setAdr	KEYWORD2
+setSubBand	KEYWORD2
+setError	KEYWORD2
+
 onMessage	KEYWORD2
 
 isBusy	KEYWORD2
 isLink	KEYWORD2
+
+send	KEYWORD2
 
 setLink	KEYWORD2
 setAdr	KEYWORD2
@@ -42,5 +49,3 @@ setDevEui	KEYWORD2
 #######################################
 # Constants (LITERAL1)
 #######################################
-
-SimpleLMICpin
