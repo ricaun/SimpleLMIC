@@ -59,10 +59,10 @@ public:
 	void join(const char *_aeui, const char *_akey);
 	void join(const char *_deui, const char *_aeui, const char *_akey);
 
-	void setLink(bool link);
-	void setAdr(bool adr);
-	void setSubBand(uint8_t band);
-	void setError(uint8_t error);
+	void setLink(bool link = true);
+	void setAdr(bool adr = true);
+	void setSubBand(uint8_t band = 1);
+	void setError(uint8_t error = 5);
 
 	bool isBusy();
 	bool isLink();
