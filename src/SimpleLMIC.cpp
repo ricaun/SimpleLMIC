@@ -352,3 +352,29 @@ void onEvent(ev_t ev)
     break;
   }
 }
+
+// ---------------------------------------------------- //
+// STM32
+// Change the HAL_GetTick 
+// to fix the noInterrupt() problem.
+// ---------------------------------------------------- //
+
+#if defined(ARDUINO_ARCH_STM32)
+uint32_t HAL_GetTick(void)
+{
+  extern __IO uint32_t uwTick;
+
+  /* Read PRIMASK register, check interrupt status before disable them */
+  /* Returns 0 if they are enabled, or non-zero if disabled */
+  if (__get_PRIMASK())
+  {
+    if (SCB->ICSR & SCB_ICSR_PENDSTSET_Msk)
+    {
+      SCB->ICSR = SCB_ICSR_PENDSTCLR_Msk;
+      HAL_IncTick();
+    }
+  }
+
+  return uwTick;
+}
+#endif
