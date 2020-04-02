@@ -70,7 +70,9 @@ void SimpleLMICClass::setAdr(bool adr)
 
 void SimpleLMICClass::setSubBand(uint8_t band)
 {
+#if CFG_LMIC_US_like
   LMIC_selectSubBand(band - 1);
+#endif
 }
 
 void SimpleLMICClass::setError(uint8_t error)
@@ -88,6 +90,11 @@ bool SimpleLMICClass::isBusy()
 bool SimpleLMICClass::isLink()
 {
   return !(LMIC.opmode & OP_LINKDEAD);
+}
+
+void SimpleLMICClass::debug(bool _bug)
+{
+  _debug = _bug;
 }
 
 void SimpleLMICClass::loop()
@@ -129,17 +136,17 @@ size_t SimpleLMICClass::write(const uint8_t *buffer, size_t size)
 
 int SimpleLMICClass::available()
 {
-  return LMIC.dataLen - position;
+  return LMIC.dataLen - bufferPosition;
 }
 
 int SimpleLMICClass::read()
 {
-  return position < LMIC.dataLen ? (LMIC.frame + LMIC.dataBeg)[position++] : -1;
+  return bufferPosition < LMIC.dataLen ? (LMIC.frame + LMIC.dataBeg)[bufferPosition++] : -1;
 }
 
 int SimpleLMICClass::peek()
 {
-  return position < LMIC.dataLen ? (LMIC.frame + LMIC.dataBeg)[position] : -1;
+  return bufferPosition < LMIC.dataLen ? (LMIC.frame + LMIC.dataBeg)[bufferPosition] : -1;
 }
 
 void SimpleLMICClass::flush()
@@ -176,13 +183,13 @@ int32_t SimpleLMICClass::read32()
 
 uint8_t *SimpleLMICClass::buffer()
 {
-  return ((uint8_t *)(LMIC.frame + LMIC.dataBeg + position));
+  return ((uint8_t *)(LMIC.frame + LMIC.dataBeg + bufferPosition));
 }
 
 void SimpleLMICClass::clear()
 {
   LMIC.pendTxLen = 0;
-  position = 0;
+  bufferPosition = 0;
 }
 
 unsigned int SimpleLMICClass::readInt()
@@ -294,11 +301,11 @@ void os_getDevKey(u1_t *buf)
 
 void onEvent(ev_t ev)
 {
-  if (pSimpleLMIC->debug)
+  if (pSimpleLMIC->_debug)
   {
-    Serial.print(os_getTime());
+    Serial.print(osticks2ms(os_getTime()));
     Serial.print(": ");
-    Serial.print(LMIC.freq);
+    Serial.print(LMIC.freq / 1000000.0);
     Serial.print(" | ");
 
     const char *const evNames[] = {LMIC_EVENT_NAME_TABLE__INIT};
@@ -355,7 +362,7 @@ void onEvent(ev_t ev)
 
 // ---------------------------------------------------- //
 // STM32
-// Change the HAL_GetTick 
+// Change the HAL_GetTick
 // to fix the noInterrupt() problem.
 // ---------------------------------------------------- //
 

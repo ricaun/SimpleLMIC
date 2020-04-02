@@ -34,15 +34,12 @@ class SimpleLMICClass : public Stream
 private:
 	// ----------------------------------------------- //
 	// 	buffer
-	uint8_t position = 0;
+	uint8_t bufferPosition = 0;
 	// ----------------------------------------------- //
-	uint8_t _sleep = 0;
-
-	uint8_t _end = 0;
 public:
-
-	bool debug = false;
-
+	// ----------------------------------------------- //
+	//	degub event
+	bool _debug = false;
 	// ----------------------------------------------- //
 	// 	LoraWan OTAA
 	uint8_t DevEui[8];
@@ -66,6 +63,8 @@ public:
 
 	bool isBusy();
 	bool isLink();
+
+	void debug(bool _bug = true);
 
 	void loop();
 	void sleep();
@@ -107,7 +106,5 @@ private:
 	void (*messageCallback)(uint8_t *payload, size_t size, uint8_t port);
 	void (*sleepCallback)();
 };
-
-//extern SimpleLMICClass SimpleLMIC;
 
 #endif
