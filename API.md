@@ -89,6 +89,18 @@ ttn.setError(error);
 ```
 * `error` - Set the clock error, defaults to `5`
 
+### Event Debug
+
+Show the events on the Serial monitor.
+
+```c
+ttn.debug(true);
+```
+or
+```c
+ttn.debug(false);
+```
+
 ### LoRaWAN Channels
 
 Set the Channel of the US region.
