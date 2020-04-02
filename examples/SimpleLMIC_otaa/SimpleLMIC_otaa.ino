@@ -18,6 +18,7 @@ void setup() {
   Serial.println();
   
   ttn.begin();
+  ttn.setSubBand(2);
   ttn.onMessage(message);
   ttn.join(devEui, appEui, appKey);
 }
