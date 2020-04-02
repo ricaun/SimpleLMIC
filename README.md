@@ -1,4 +1,4 @@
-# SimpleLMIC - Alpha Version
+# SimpleLMIC
 
 Simple library for using the Arduino LMIC library with The Things Network and LoRaWAN&reg; networks.
 
